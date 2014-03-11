@@ -11,9 +11,11 @@
 #import "BoardVerticalLine.h"
 #import "BoardHorizontalLine.h"
 #import "SquaresGame.h"
+#import "GameBoard.h"
 
 @interface SquaresGameViewController ()
 @property (nonatomic, strong) SquaresGame *game;
+@property (nonatomic, strong) GameBoard *board;
 @property (strong, nonatomic) NSMutableArray *verticalLines;
 @property (strong, nonatomic) NSMutableArray *horizontalLines;
 @property (weak, nonatomic) IBOutlet UILabel *RedPlayerScore;
@@ -27,7 +29,6 @@
 {
     if (!_game) {
         _game = [[SquaresGame alloc] init];
-        NSLog(@"Game has been instantiated.");
     }
     return _game;
 }
@@ -40,6 +41,8 @@
     
     self.horizontalLines = [[NSMutableArray alloc] init];
     self.verticalLines = [[NSMutableArray alloc] init];
+    
+    // Set action for buttons added by SquaresBoardView
     
     for (UIView *vw in [self.view subviews]){
         if ([vw isKindOfClass:[SquaresBoardView class]]) {
@@ -57,26 +60,35 @@
 
         }
     }
+    
+    // reset scores to zero
+    
+    [_game setPlayer1Score:0];
+    [_game setPlayer2Score:0];
+    
+    // instantiate and initialize game board
+    
+    _board = [[GameBoard alloc] init];
+    
 }
 
 - (void)hLineTapped: (id) sender
 {
     BoardHorizontalLine *bhl = (BoardHorizontalLine *) sender;
-    if ([bhl stateOfLine] == (LineState)LineStateFree) {
-        NSLog(@"hLine tapped at row= %lu and column = %lu ", (unsigned long)bhl.row, (unsigned long)bhl.column);
-        [bhl setStateOfLine:(LineState) LineStateRed];
-        [bhl setNeedsDisplay];
-    }
+    [self.game selectHorizontalLine:bhl];
+    NSUInteger val= [self.game player1Score] + 1;
+    [self.game setPlayer1Score:val];
+    NSString *score = [NSString stringWithFormat:@"%i", self.game.player1Score];
+    [self.RedPlayerScore setText:score];
 }
 
 - (void)vLineTapped: (id) sender
 {
     BoardVerticalLine *bvl = (BoardVerticalLine *) sender;
-    if ([bvl stateOfLine] == (LineState)LineStateFree) {
-        NSLog(@"vLine tapped at row= %lu and column = %lu ", (unsigned long)bvl.row, (unsigned long)bvl.column);
-       [bvl setStateOfLine:(LineState) LineStateBlue];
-        [bvl setNeedsDisplay];
-    }
+    [self.game selectVerticalLine:bvl];
+    [self.game setPlayer2Score:self.game.player2Score++];
+    NSString *score = [NSString stringWithFormat:@"%i", self.game.player2Score];
+    [self.BluePlayerScore setText:score];
 }
 
 

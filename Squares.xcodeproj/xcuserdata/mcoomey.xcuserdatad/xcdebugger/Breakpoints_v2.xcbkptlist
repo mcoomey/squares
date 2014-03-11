@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Squares/SquaresGameViewController.m"
-            timestampString = "416157272.65455"
+            timestampString = "416185358.184817"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
             landmarkName = "@implementation SquaresGameViewController"
             landmarkType = "3">
          </BreakpointContent>
