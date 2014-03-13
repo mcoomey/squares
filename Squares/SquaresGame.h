@@ -7,14 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GameBoard.h"
 #import "BoardHorizontalLine.h"
 #import "BoardVerticalLine.h"
 
 @interface SquaresGame : NSObject
 
-@property (nonatomic, readwrite) NSUInteger player1Score;
-@property (nonatomic, readwrite) NSUInteger player2Score;
+@property (nonatomic, readwrite) int player1Score;
+@property (nonatomic, readwrite) int player2Score;
+@property (nonatomic, strong) GameBoard *board;
+@property (nonatomic, readwrite) LineState currentPlayer;
 
 -(void)selectHorizontalLine:(BoardHorizontalLine*)bhl;
 -(void)selectVerticalLine:(BoardVerticalLine*)bvl;
+
 @end

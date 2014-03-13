@@ -26,6 +26,7 @@
 		BD035CA918C7A209000E47A3 /* BoardHorizontalLine.m in Sources */ = {isa = PBXBuildFile; fileRef = BD035CA818C7A209000E47A3 /* BoardHorizontalLine.m */; };
 		BD035CAC18C7A227000E47A3 /* BoardVerticalLine.m in Sources */ = {isa = PBXBuildFile; fileRef = BD035CAB18C7A227000E47A3 /* BoardVerticalLine.m */; };
 		BD035CB018CE3231000E47A3 /* GameBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = BD035CAF18CE3231000E47A3 /* GameBoard.m */; };
+		BDB7DDDE18D11CD600B4DB66 /* BoardSquare.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB7DDDD18D11CD600B4DB66 /* BoardSquare.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,8 @@
 		BD035CAD18CA3F82000E47A3 /* LineState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LineState.h; sourceTree = "<group>"; };
 		BD035CAE18CE3231000E47A3 /* GameBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameBoard.h; sourceTree = "<group>"; };
 		BD035CAF18CE3231000E47A3 /* GameBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameBoard.m; sourceTree = "<group>"; };
+		BDB7DDDC18D11CD600B4DB66 /* BoardSquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardSquare.h; sourceTree = "<group>"; };
+		BDB7DDDD18D11CD600B4DB66 /* BoardSquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardSquare.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,8 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				BD035C7118C67206000E47A3 /* Main.storyboard */,
-				BD035C9918C69DED000E47A3 /* SquaresGameViewController.h */,
-				BD035C9A18C69DED000E47A3 /* SquaresGameViewController.m */,
+				BD76A2BC18CF9148002A4C1D /* Control */,
 				BD035C9C18C786F7000E47A3 /* Model */,
 				BD035CA018C78BF5000E47A3 /* View */,
 				BD035C7718C67206000E47A3 /* Images.xcassets */,
@@ -174,10 +176,10 @@
 			isa = PBXGroup;
 			children = (
 				BD035CAD18CA3F82000E47A3 /* LineState.h */,
-				BD035CAE18CE3231000E47A3 /* GameBoard.h */,
-				BD035CAF18CE3231000E47A3 /* GameBoard.m */,
 				BD035C9D18C7872A000E47A3 /* SquaresGame.h */,
 				BD035C9E18C7872A000E47A3 /* SquaresGame.m */,
+				BD035CAE18CE3231000E47A3 /* GameBoard.h */,
+				BD035CAF18CE3231000E47A3 /* GameBoard.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -191,8 +193,19 @@
 				BD035CA818C7A209000E47A3 /* BoardHorizontalLine.m */,
 				BD035CAA18C7A227000E47A3 /* BoardVerticalLine.h */,
 				BD035CAB18C7A227000E47A3 /* BoardVerticalLine.m */,
+				BDB7DDDC18D11CD600B4DB66 /* BoardSquare.h */,
+				BDB7DDDD18D11CD600B4DB66 /* BoardSquare.m */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		BD76A2BC18CF9148002A4C1D /* Control */ = {
+			isa = PBXGroup;
+			children = (
+				BD035C9A18C69DED000E47A3 /* SquaresGameViewController.m */,
+				BD035C9918C69DED000E47A3 /* SquaresGameViewController.h */,
+			);
+			name = Control;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,7 +252,7 @@
 		BD035C5418C67206000E47A3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Michael Coomey";
 				TargetAttributes = {
 					BD035C7C18C67206000E47A3 = {
@@ -297,6 +310,7 @@
 				BD035C7018C67206000E47A3 /* AppDelegate.m in Sources */,
 				BD035C6C18C67206000E47A3 /* main.m in Sources */,
 				BD035CA918C7A209000E47A3 /* BoardHorizontalLine.m in Sources */,
+				BDB7DDDE18D11CD600B4DB66 /* BoardSquare.m in Sources */,
 				BD035CA618C798A4000E47A3 /* SquaresBoardView.m in Sources */,
 				BD035C9F18C7872A000E47A3 /* SquaresGame.m in Sources */,
 				BD035C9B18C69DED000E47A3 /* SquaresGameViewController.m in Sources */,
@@ -353,7 +367,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -393,7 +406,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -452,7 +464,6 @@
 		BD035C9218C67206000E47A3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Squares.app/Squares";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -475,7 +486,6 @@
 		BD035C9318C67206000E47A3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Squares.app/Squares";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -510,6 +520,7 @@
 				BD035C9018C67206000E47A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BD035C9118C67206000E47A3 /* Build configuration list for PBXNativeTarget "SquaresTests" */ = {
 			isa = XCConfigurationList;
@@ -518,6 +529,7 @@
 				BD035C9318C67206000E47A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

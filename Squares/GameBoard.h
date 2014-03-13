@@ -11,4 +11,8 @@
 
 @interface GameBoard : NSObject
 
+- (void) setVLineAtRow:(int)row andColumn:(int)col toState:(LineState)state;
+- (void) setHLineAtRow:(int)row andColumn:(int)col toState:(LineState)state;
+- (void) setSquareAtRos:(int)row andColumn:(int)col toState:(LineState)state;
+
 @end
