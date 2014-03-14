@@ -8,7 +8,8 @@
 
 #import "SquaresGame.h"
 #import "GameBoard.h"
-
+#import "GameConstants.h"
+#import "SquaresGameViewController.h"
 
 @implementation SquaresGame
 
@@ -22,13 +23,14 @@
         self.player1Score = 0;
         self.player2Score = 0;
         self.currentPlayer = LineStateRed;
+        self.linesRemaining = NUM_ROWS * (NUM_COLS + 1) + NUM_COLS * (NUM_ROWS + 1);        
         NSLog(@"Game has been instantiated.");
         self.board = [[GameBoard alloc] init];
     }
     return self;
 }
 
--(void)selectHorizontalLine:(BoardHorizontalLine*)bhl {
+-(BOOL)selectHorizontalLine:(BoardHorizontalLine*)bhl {
     if ([bhl stateOfLine] == (LineState)LineStateFree) {
         [bhl setStateOfLine:self.currentPlayer];
         [self.board setHLineAtRow:(int)bhl.row andColumn:(int)bhl.column toState:self.currentPlayer];
@@ -36,11 +38,13 @@
         [bhl setNeedsDisplay];
         
         [self togglePlayer];
+        self.linesRemaining--;
+        return YES;             // return YES to update the display
     }
-
+    return NO;                  // nothing has changed - no update necessary
 }
 
--(void)selectVerticalLine:(BoardVerticalLine*)bvl {
+-(BOOL)selectVerticalLine:(BoardVerticalLine*)bvl {
     if ([bvl stateOfLine] == (LineState)LineStateFree) {
         [bvl setStateOfLine:self.currentPlayer];
         [self.board setVLineAtRow:(int)bvl.row andColumn:(int)bvl.column toState:self.currentPlayer];
@@ -48,8 +52,10 @@
         [bvl setNeedsDisplay];
 
         [self togglePlayer];
+        self.linesRemaining--;
+        return YES;             // return YES to update the display
     }
-
+    return NO;                  // nothing has changed - no update necessary
 }
 
 - (void) togglePlayer {

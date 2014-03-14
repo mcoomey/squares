@@ -17,8 +17,9 @@
 @property (nonatomic, readwrite) int player2Score;
 @property (nonatomic, strong) GameBoard *board;
 @property (nonatomic, readwrite) LineState currentPlayer;
+@property (nonatomic, readwrite) NSUInteger linesRemaining;
 
--(void)selectHorizontalLine:(BoardHorizontalLine*)bhl;
--(void)selectVerticalLine:(BoardVerticalLine*)bvl;
+-(BOOL)selectHorizontalLine:(BoardHorizontalLine*)bhl;
+-(BOOL)selectVerticalLine:(BoardVerticalLine*)bvl;
 
 @end

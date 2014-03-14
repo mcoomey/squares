@@ -16,10 +16,6 @@
 
 @interface SquaresGameViewController ()
 @property (nonatomic, strong) SquaresGame *game;
-//@property (nonatomic, strong) GameBoard *board;
-@property (weak, nonatomic) IBOutlet UILabel *RedPlayerScore;
-@property (weak, nonatomic) IBOutlet UILabel *BluePlayerScore;
-
 @end
 
 @implementation SquaresGameViewController
@@ -61,21 +57,29 @@
 
         }
     }
+    [self updateScores];
     
 }
 
 - (void)hLineTapped: (id) sender
 {
     BoardHorizontalLine *bhl = (BoardHorizontalLine *) sender;
-    [self.game selectHorizontalLine:bhl];
+    if ([self.game selectHorizontalLine:bhl])
+        [self updateScores];
 }
 
 - (void)vLineTapped: (id) sender
 {
     BoardVerticalLine *bvl = (BoardVerticalLine *) sender;
-    [self.game selectVerticalLine:bvl];
+    if ([self.game selectVerticalLine:bvl])
+        [self updateScores];
 }
 
-
+- (void)updateScores
+{
+    self.linesRemainingLabel.text = [NSString stringWithFormat:@"%lu Lines Remaining", (unsigned long)[self.game linesRemaining]];
+    self.player1ScoreLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)[self.game player1Score]];
+    self.player2ScoreLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)[self.game player2Score]];
+}
 
 @end
