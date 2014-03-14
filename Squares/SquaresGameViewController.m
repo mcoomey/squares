@@ -10,12 +10,13 @@
 #import "SquaresBoardView.h"
 #import "BoardVerticalLine.h"
 #import "BoardHorizontalLine.h"
+#import "BoardSquare.h"
 #import "SquaresGame.h"
 #import "GameBoard.h"
 
 @interface SquaresGameViewController ()
 @property (nonatomic, strong) SquaresGame *game;
-@property (nonatomic, strong) GameBoard *board;
+//@property (nonatomic, strong) GameBoard *board;
 @property (weak, nonatomic) IBOutlet UILabel *RedPlayerScore;
 @property (weak, nonatomic) IBOutlet UILabel *BluePlayerScore;
 
@@ -41,12 +42,20 @@
     
     for (UIView *vw in [self.view subviews]){
         if ([vw isKindOfClass:[SquaresBoardView class]]) {
-            for (UIButton *btn in [vw subviews]){
+            for (BoardHorizontalLine *btn in [vw subviews]){
                 if ([btn isKindOfClass:[BoardHorizontalLine class]]) {
                     [btn addTarget:self action:@selector(hLineTapped:) forControlEvents:UIControlEventTouchUpInside];
+                    [self.game.board.hLines addObject:btn];
                 }
                 else if ([btn isKindOfClass:[BoardVerticalLine class]]) {
                     [btn addTarget:self action:@selector(vLineTapped:) forControlEvents:UIControlEventTouchUpInside];
+                    [self.game.board.vLines addObject:btn];
+
+                }
+            }
+            for (UIView *bsv in [vw subviews]){
+                if ([bsv isKindOfClass:[BoardSquare class]]) {
+                    [self.game.board.squares addObject:bsv];
                 }
             }
 
@@ -59,19 +68,12 @@
 {
     BoardHorizontalLine *bhl = (BoardHorizontalLine *) sender;
     [self.game selectHorizontalLine:bhl];
-//    int val= [self.game player1Score] + 1;
-//    [self.game setPlayer1Score:val];
-//    NSString *score = [NSString stringWithFormat:@"%i", self.game.player1Score];
-//    [self.RedPlayerScore setText:score];
 }
 
 - (void)vLineTapped: (id) sender
 {
     BoardVerticalLine *bvl = (BoardVerticalLine *) sender;
     [self.game selectVerticalLine:bvl];
-//    [self.game setPlayer2Score:self.game.player2Score++];
-//    NSString *score = [NSString stringWithFormat:@"%i", self.game.player2Score];
-//    [self.BluePlayerScore setText:score];
 }
 
 

@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Michael Coomey. All rights reserved.
 //
 
-#import "SquaresGameViewController.h"
+#import "GameConstants.h"
 #import "SquaresBoardView.h"
 
 #import "BoardHorizontalLine.h"
@@ -16,14 +16,6 @@
 
 @implementation SquaresBoardView
 
-//- (id)initWithFrame:(CGRect)frame
-//{
-//    self = [super initWithFrame:frame];
-//    if (self) {
-//        // Initialization code
-//    }
-//    return self;
-//}
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -31,16 +23,15 @@
     if (self) {
         
         // Initialization code
-        float rowHeight = (self.frame.size.height-20) / 8.0;
-        float columnWidth = (self.frame.size.width-20) / 8.0;
-        int tag = 100;
+        float rowHeight = (self.frame.size.height-20) / (float)NUM_ROWS;
+        float columnWidth = (self.frame.size.width-20) / (float)NUM_COLS;
         
-        for (int col = 0; col < 8; col++)
+        for (int col = 0; col < NUM_COLS; col++)
         {
-            for (int row = 0; row < 9; row++)
+            for (int row = 0; row < NUM_ROWS+1; row++)
             {
-                // add the 8 x 8 grid of squares
-                if (row < 8) {
+                // add the grid of squares
+                if (row < NUM_ROWS) {
                     BoardSquare *bSquare = [[BoardSquare alloc]initWithFrame:CGRectMake(col*columnWidth+10, row*rowHeight+10, columnWidth, rowHeight)
                                                                       Column:col
                                                                       andRow:row ];
@@ -51,17 +42,13 @@
                 BoardHorizontalLine *hLine = [[BoardHorizontalLine alloc]initWithFrame:CGRectMake(col*columnWidth+10, row*rowHeight, columnWidth, 20)
                                                                                 Column:col
                                                                                 andRow:row  ];
-                [hLine setTag:tag];
                 [self addSubview:hLine];
-                tag++;
                 
                 // add the vertical lines
                 BoardVerticalLine *vLine = [[BoardVerticalLine alloc]initWithFrame:CGRectMake(row*columnWidth, col*rowHeight+10, 20, rowHeight)
                                                                             Column:row
                                                                             andRow:col ];
-                [vLine setTag:tag];
                 [self addSubview:vLine];
-                tag++;
                 
             }
         }

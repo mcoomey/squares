@@ -7,56 +7,68 @@
 //
 
 #import "GameBoard.h"
+#import "BoardVerticalLine.h"
+#import "BoardHorizontalLine.h"
 
 @implementation GameBoard
-{
-    LineState _vLineState[9][8];
-    LineState _hLineState[8][9];
-    LineState _gridState[8][8];
-}
 
 - (id)init
 {
     self = [super init];
     if (self) {
-        [self clearBoard];
+        
         NSLog(@"GameBoard has been instantiated.");
-
-    }
-    else {
-        NSLog(@"Error instatiating GameBoard");
     }
     return self;
 }
 
-- (void) clearBoard {
-    for (int r=0; r<9; r++) {
-        for (int c=0; c<8; c++) {
-            _vLineState[r][c] = LineStateFree;
-        }
+- (NSMutableArray *) squares
+{
+    if (!_squares) {
+        _squares = [[NSMutableArray alloc]init];
+        NSLog(@"squares has been instantiated.");
     }
-    for (int r=0; r<8; r++) {
-        for (int c=0; c<9; c++) {
-            _hLineState[r][c] = LineStateFree;
-        }
-    }
-    for (int r=0; r<8; r++) {
-        for (int c=0; c<8; c++) {
-            _gridState[r][c] = LineStateFree;
-        }
-    }
+    return _squares;
 }
 
-- (void) setVLineAtRow:(int)row andColumn:(int)col toState:(LineState)state {
-    _vLineState[row][col] = state;
+- (NSMutableArray *) vLines
+{
+    if (!_vLines) {
+        _vLines = [[NSMutableArray alloc]init];
+        NSLog(@"vLines has been instantiated.");
+    }
+    return _vLines;
 }
 
-- (void) setHLineAtRow:(int)row andColumn:(int)col toState:(LineState)state {
-    _hLineState[row][col] = state;
+- (NSMutableArray *) hLines
+{
+    if (!_hLines) {
+        _hLines = [[NSMutableArray alloc]init];
+        NSLog(@"hLines has been instantiated.");
+    }
+    return _hLines;
 }
 
-- (void) setSquareAtRos:(int)row andColumn:(int)col toState:(LineState)state {
-    _gridState[row][col] = state;
+- (void) setVLineAtRow:(int)row andColumn:(int)col toState:(LineState)lstate {
+    int idx = row*9+col;
+    BoardVerticalLine *bvl = [[BoardVerticalLine alloc]init];
+    bvl.row = row;
+    bvl.column = col;
+    bvl.stateOfLine = lstate;
+    [self.vLines replaceObjectAtIndex:idx withObject:bvl];
+
+}
+
+- (void) setHLineAtRow:(int)row andColumn:(int)col toState:(LineState)lstate {
+    int idx = col*9+row;
+    BoardHorizontalLine *bhl = [[BoardHorizontalLine alloc]init];
+    bhl.row = row;
+    bhl.column = col;
+    bhl.stateOfLine = lstate;
+    [self.hLines replaceObjectAtIndex:idx withObject:bhl];
+}
+
+- (void) setSquareAtRow:(int)row andColumn:(int)col toState:(LineState)state {
 }
 
 @end
