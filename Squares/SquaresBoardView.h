@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BoardHorizontalLine.h"
+#import "BoardVerticalLine.h"
+#import "BoardSquare.h"
 
 @interface SquaresBoardView : UIView
+
 
 @end

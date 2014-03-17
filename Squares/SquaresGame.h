@@ -19,7 +19,7 @@
 @property (nonatomic, readwrite) LineState currentPlayer;
 @property (nonatomic, readwrite) NSUInteger linesRemaining;
 
--(BOOL)selectHorizontalLine:(BoardHorizontalLine*)bhl;
--(BOOL)selectVerticalLine:(BoardVerticalLine*)bvl;
-
+- (BOOL)selectHorizontalLine:(BoardHorizontalLine*)bhl;
+- (BOOL)selectVerticalLine:(BoardVerticalLine*)bvl;
+- (void) resetGameValues;
 @end

@@ -6,9 +6,10 @@
 //  Copyright (c) 2014 Michael Coomey. All rights reserved.
 //
 
+#import "GameConstants.h"
+#import "LineState.h"
 #import "GameBoard.h"
-#import "BoardVerticalLine.h"
-#import "BoardHorizontalLine.h"
+#import "BoardSquare.h"
 
 @implementation GameBoard
 
@@ -26,7 +27,7 @@
 {
     if (!_squares) {
         _squares = [[NSMutableArray alloc]init];
-        NSLog(@"squares has been instantiated.");
+       NSLog(@"squares has been instantiated.");
     }
     return _squares;
 }
@@ -35,6 +36,11 @@
 {
     if (!_vLines) {
         _vLines = [[NSMutableArray alloc]init];
+        LineState ls = LineStateFree;
+        // init the vLines array with the correct number of vals to hold all the vertical lines
+        for (int idx=0; idx < (NUM_COLS+1)*NUM_ROWS; idx++) {
+            [_vLines addObject:[NSNumber numberWithInt:ls]];
+        }
         NSLog(@"vLines has been instantiated.");
     }
     return _vLines;
@@ -44,31 +50,64 @@
 {
     if (!_hLines) {
         _hLines = [[NSMutableArray alloc]init];
+        LineState ls = LineStateFree;
+        // init the hLines array with the correct number of vals to hold all the horizontal lines
+        for (int idx=0; idx < (NUM_ROWS+1)*NUM_COLS; idx++) {
+            [_hLines addObject:[NSNumber numberWithInt:ls]];
+        }
         NSLog(@"hLines has been instantiated.");
     }
     return _hLines;
 }
 
-- (void) setVLineAtRow:(int)row andColumn:(int)col toState:(LineState)lstate {
-    int idx = row*9+col;
-    BoardVerticalLine *bvl = [[BoardVerticalLine alloc]init];
-    bvl.row = row;
-    bvl.column = col;
-    bvl.stateOfLine = lstate;
-    [self.vLines replaceObjectAtIndex:idx withObject:bvl];
-
+// reset the hLines
+-(void) resetHLines {
+    LineState ls = LineStateFree;
+    for (int idx=0; idx < (NUM_ROWS+1)*NUM_COLS; idx++) {
+        [self.hLines replaceObjectAtIndex:idx withObject:[NSNumber numberWithInt:ls]];
+    }
 }
 
-- (void) setHLineAtRow:(int)row andColumn:(int)col toState:(LineState)lstate {
-    int idx = col*9+row;
-    BoardHorizontalLine *bhl = [[BoardHorizontalLine alloc]init];
-    bhl.row = row;
-    bhl.column = col;
-    bhl.stateOfLine = lstate;
-    [self.hLines replaceObjectAtIndex:idx withObject:bhl];
+// reset the vLines
+-(void) resetVLines {
+    LineState ls = LineStateFree;
+    for (int idx=0; idx < (NUM_COLS+1)*NUM_ROWS; idx++){
+        [self.vLines replaceObjectAtIndex:idx withObject:[NSNumber numberWithInt:ls]];
+    }
 }
 
-- (void) setSquareAtRow:(int)row andColumn:(int)col toState:(LineState)state {
+// reset the squares
+-(void) resetSquares {
+    BoardSquare *bsq = [[BoardSquare alloc]init];
+    [bsq setStateOfSquare:LineStateFree];
+    for (int idx=0; idx < (NUM_COLS * NUM_ROWS); idx++) {
+        [self.squares replaceObjectAtIndex:idx withObject:bsq];
+    }
+}
+
+
+- (void) setVLineAtRow:(int)row andColumn:(int)col toState:(LineState)lstate
+{
+}
+
+- (void) setHLineAtRow:(int)row andColumn:(int)col toState:(LineState)lstate
+{
+}
+
+- (void) setSquareAtRow:(int)row andColumn:(int)col toState:(LineState)state
+{
+}
+- (LineState) getVLineStateAtRow:(int)row andColumn:(int)col
+{
+    return LineStateFree;   // debug *******
+}
+- (LineState) getHLineStateAtRow:(int)row andColumn:(int)col
+{
+    return LineStateFree;   // debug *******
+}
+- (LineState) getSquareStateAtRow:(int)row andColumn:(int)col
+{
+    return LineStateFree;   // debug *******
 }
 
 @end

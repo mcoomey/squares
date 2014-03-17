@@ -15,4 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *currentPlayerLabel;
 @property (weak, nonatomic) IBOutlet UITextField *player1Name;
 @property (weak, nonatomic) IBOutlet UITextField *player2Name;
+@property (weak, nonatomic) IBOutlet UIButton *resetButton;
+@property (weak, nonatomic) IBOutlet UIButton *startButton;
 @end

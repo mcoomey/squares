@@ -35,17 +35,17 @@
     UIColor * red = [UIColor redColor];
     UIColor * blue = [UIColor blueColor];
     
-    if (self.stateOfLine == (LineState) LineStateFree) {
+    if (self.stateOfLine == LineStateFree) {
         CGContextSetStrokeColorWithColor(context, lightGray.CGColor);
         CGContextSetLineWidth(context, 2.0);
     }
     
-    else if (self.stateOfLine == (LineState) LineStateRed) {
+    else if (self.stateOfLine == LineStateRed) {
         CGContextSetStrokeColorWithColor(context, red.CGColor);
         CGContextSetLineWidth(context, 4.0);
     }
     
-    else if (self.stateOfLine == (LineState) LineStateBlue) {
+    else if (self.stateOfLine == LineStateBlue) {
         CGContextSetStrokeColorWithColor(context, blue.CGColor);
         CGContextSetLineWidth(context, 4.0);
     }

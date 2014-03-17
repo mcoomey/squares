@@ -36,15 +36,15 @@
     UIColor * red = [UIColor redColor];
     UIColor * blue = [UIColor blueColor];
     
-    if (self.stateOfSquare == (LineState) LineStateFree) {
+    if (self.stateOfSquare == LineStateFree) {
         CGContextSetFillColorWithColor(context, clear.CGColor);
     }
     
-    else if (self.stateOfSquare == (LineState) LineStateRed) {
+    else if (self.stateOfSquare == LineStateRed) {
         CGContextSetFillColorWithColor(context, red.CGColor);
     }
     
-    else if (self.stateOfSquare == (LineState) LineStateBlue) {
+    else if (self.stateOfSquare == LineStateBlue) {
         CGContextSetFillColorWithColor(context, blue.CGColor);
     }
     
