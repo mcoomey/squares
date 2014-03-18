@@ -25,6 +25,10 @@
         NSLog(@"Game has been instantiated.");
         self.board = [[GameBoard alloc] init];
     }
+    
+    
+    
+    
     return self;
 }
 
@@ -42,13 +46,20 @@
     if ([bhl stateOfLine] == LineStateFree) {
         [bhl setStateOfLine:self.currentPlayer];
         [self.board setHLineAtRow:(int)bhl.row andColumn:(int)bhl.column toState:self.currentPlayer];
-        NSLog(@"hLine(%ld) tapped at row= %lu and column = %lu ", (long)bhl.tag, (unsigned long)bhl.row, (unsigned long)bhl.column);
+        NSLog(@"hLine tapped at row= %lu and column = %lu ", (unsigned long)bhl.row, (unsigned long)bhl.column);
         [bhl setNeedsDisplay];
         
-        if (bhl.row > 0) {
-            [self.board setSquareAtRow:(int)bhl.row-1 andColumn:(int)bhl.column toState:self.currentPlayer];
+        // debug ************
+        if (bhl.row < NUM_ROWS) {
+            unsigned long idx = (unsigned long) bhl.row * NUM_COLS + (unsigned long) bhl.column;
+            BoardSquare *bsq = [self.board.squares objectAtIndex:idx];
+            [bsq setStateOfSquare:self.currentPlayer];
+            [bsq setNeedsDisplay];
+            [self.board.squares replaceObjectAtIndex:idx withObject:bsq];
+            self.player1Score++;
         }
-        
+        // debug ************
+
         [self togglePlayer];
         self.linesRemaining--;
         return YES;             // return YES to update the display
@@ -61,7 +72,7 @@
     if ([bvl stateOfLine] == LineStateFree) {
         [bvl setStateOfLine:self.currentPlayer];
         [self.board setVLineAtRow:(int)bvl.row andColumn:(int)bvl.column toState:self.currentPlayer];
-        NSLog(@"vLine(%ld) tapped at row= %lu and column = %lu ", (long)bvl.tag, (unsigned long)bvl.row, (unsigned long)bvl.column);
+        NSLog(@"vLine tapped at row= %lu and column = %lu ", (unsigned long)bvl.row, (unsigned long)bvl.column);
         [bvl setNeedsDisplay];
 
         [self togglePlayer];

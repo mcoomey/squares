@@ -18,9 +18,6 @@
 @interface SquaresGameViewController ()
 @property (nonatomic, strong) SquaresGame *game;
 @property (nonatomic) BOOL playingGame;
-//@property (strong, nonatomic)  NSMutableArray *vLines;
-//@property (strong, nonatomic) NSMutableArray *hLines;
-@property (nonatomic, strong) NSMutableArray *squares;
 @end
 
 @implementation SquaresGameViewController
@@ -44,7 +41,6 @@
     self.currentPlayerLabel.hidden = YES;
     self.resetButton.hidden = YES;
     
-    self.squares = [[NSMutableArray alloc]init];
     
     // Set action for buttons added by SquaresBoardView
     
