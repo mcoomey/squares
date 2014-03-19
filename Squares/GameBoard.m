@@ -101,30 +101,20 @@
 }
 
 
-- (LineState) getVLineStateAtRow:(int)row andColumn:(int)col
+- (int) getVLineStateAtRow:(int)row andColumn:(int)col
 {
     int idx = row * (NUM_COLS+1) + col;
-    return (LineState)[self.vLines objectAtIndex:idx];
+    int value = [[self.vLines objectAtIndex:idx] intValue];
+    return value;
 }
 
 
-- (LineState) getHLineStateAtRow:(int)row andColumn:(int)col
+- (int) getHLineStateAtRow:(int)row andColumn:(int)col
 {
-    int idx = row * (NUM_COLS+1) + col;
-    return (LineState)[self.hLines objectAtIndex:idx];
+    int idx = row * NUM_COLS + col;
+    int value = [[self.hLines objectAtIndex:idx] intValue];
+    return value;
     
-}
-
-
-- (LineState) getVLineStateAtIndex:(int)idx
-{
-    return (LineState)[self.vLines objectAtIndex:idx];
-}
-
-
-- (LineState) getHLineStateAtIndex:(int)idx
-{
-    return (LineState)[self.hLines objectAtIndex:idx];
 }
 
 
@@ -138,10 +128,5 @@
 
 }
 
-
-- (LineState) getSquareStateAtRow:(int)row andColumn:(int)col
-{
-    return LineStateFree;   // debug *******
-}
 
 @end

@@ -22,7 +22,6 @@
 - (void) setVLineAtRow:(int)row andColumn:(int)col toState:(LineState)lstate;
 - (void) setHLineAtRow:(int)row andColumn:(int)col toState:(LineState)lstate;
 - (void) setSquareAtRow:(int)row andColumn:(int)col toState:(LineState)lstate;
-- (LineState) getVLineStateAtRow:(int)row andColumn:(int)col;
-- (LineState) getHLineStateAtRow:(int)row andColumn:(int)col;
-- (LineState) getSquareStateAtRow:(int)row andColumn:(int)col;
+- (int) getVLineStateAtRow:(int)row andColumn:(int)col;
+- (int) getHLineStateAtRow:(int)row andColumn:(int)col;
 @end

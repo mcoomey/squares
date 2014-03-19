@@ -46,7 +46,7 @@
     
     UIView *squaresBoardView = [self.view viewWithTag:1];
     
-    //add touch event to each horizontal line and add it to the hLines array
+    //add touch event to each horizontal and vertical line
     
     for (BoardHorizontalLine *btn in [squaresBoardView subviews]){
         if ([btn isKindOfClass:[BoardHorizontalLine class]]) {
