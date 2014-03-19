@@ -10,6 +10,8 @@
 #import "LineState.h"
 #import "GameBoard.h"
 #import "BoardSquare.h"
+#import "BoardHorizontalLine.h"
+#import "BoardVerticalLine.h"
 
 @implementation GameBoard
 
@@ -88,23 +90,55 @@
 
 - (void) setVLineAtRow:(int)row andColumn:(int)col toState:(LineState)lstate
 {
+    int idx = row * (NUM_COLS+1) + col;
+    [self.vLines replaceObjectAtIndex:idx withObject:[NSNumber numberWithInt:lstate]];
 }
 
 - (void) setHLineAtRow:(int)row andColumn:(int)col toState:(LineState)lstate
 {
+    int idx = row * NUM_COLS + col;
+    [self.hLines replaceObjectAtIndex:idx withObject:[NSNumber numberWithInt:lstate]];
 }
+
+
+- (LineState) getVLineStateAtRow:(int)row andColumn:(int)col
+{
+    int idx = row * (NUM_COLS+1) + col;
+    return (LineState)[self.vLines objectAtIndex:idx];
+}
+
+
+- (LineState) getHLineStateAtRow:(int)row andColumn:(int)col
+{
+    int idx = row * (NUM_COLS+1) + col;
+    return (LineState)[self.hLines objectAtIndex:idx];
+    
+}
+
+
+- (LineState) getVLineStateAtIndex:(int)idx
+{
+    return (LineState)[self.vLines objectAtIndex:idx];
+}
+
+
+- (LineState) getHLineStateAtIndex:(int)idx
+{
+    return (LineState)[self.hLines objectAtIndex:idx];
+}
+
 
 - (void) setSquareAtRow:(int)row andColumn:(int)col toState:(LineState)state
 {
+    unsigned long idx = row * NUM_COLS + col;
+    BoardSquare *bsq = [self.squares objectAtIndex:idx];
+    [bsq setStateOfSquare:state];
+    [bsq setNeedsDisplay];
+    [self.squares replaceObjectAtIndex:idx withObject:bsq];
+
 }
-- (LineState) getVLineStateAtRow:(int)row andColumn:(int)col
-{
-    return LineStateFree;   // debug *******
-}
-- (LineState) getHLineStateAtRow:(int)row andColumn:(int)col
-{
-    return LineStateFree;   // debug *******
-}
+
+
 - (LineState) getSquareStateAtRow:(int)row andColumn:(int)col
 {
     return LineStateFree;   // debug *******

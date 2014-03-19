@@ -25,10 +25,6 @@
         NSLog(@"Game has been instantiated.");
         self.board = [[GameBoard alloc] init];
     }
-    
-    
-    
-    
     return self;
 }
 
@@ -42,25 +38,31 @@
     [self.board resetSquares];
 }
 
+
+- (void) togglePlayer {
+    self.currentPlayer = (self.currentPlayer == LineStateRed) ? LineStateBlue : LineStateRed;
+}
+
+- (void) incrementScore {
+    if (self.currentPlayer == LineStateRed) {
+        self.player1Score++;
+    }
+    else {
+        self.player2Score++;
+    }
+    
+}
+
 -(BOOL)selectHorizontalLine:(BoardHorizontalLine*)bhl {
-    if ([bhl stateOfLine] == LineStateFree) {
+    
+    if ([bhl stateOfLine] == LineStateFree) {   // if line is not yet selected
         [bhl setStateOfLine:self.currentPlayer];
         [self.board setHLineAtRow:(int)bhl.row andColumn:(int)bhl.column toState:self.currentPlayer];
-        NSLog(@"hLine tapped at row= %lu and column = %lu ", (unsigned long)bhl.row, (unsigned long)bhl.column);
         [bhl setNeedsDisplay];
         
-        // debug ************
-        if (bhl.row < NUM_ROWS) {
-            unsigned long idx = (unsigned long) bhl.row * NUM_COLS + (unsigned long) bhl.column;
-            BoardSquare *bsq = [self.board.squares objectAtIndex:idx];
-            [bsq setStateOfSquare:self.currentPlayer];
-            [bsq setNeedsDisplay];
-            [self.board.squares replaceObjectAtIndex:idx withObject:bsq];
-            self.player1Score++;
+        if (![self hLineDidCompleteSquare:bhl]) {
+             [self togglePlayer];
         }
-        // debug ************
-
-        [self togglePlayer];
         self.linesRemaining--;
         return YES;             // return YES to update the display
     }
@@ -69,21 +71,63 @@
 }
 
 -(BOOL)selectVerticalLine:(BoardVerticalLine*)bvl {
+    
     if ([bvl stateOfLine] == LineStateFree) {
         [bvl setStateOfLine:self.currentPlayer];
         [self.board setVLineAtRow:(int)bvl.row andColumn:(int)bvl.column toState:self.currentPlayer];
-        NSLog(@"vLine tapped at row= %lu and column = %lu ", (unsigned long)bvl.row, (unsigned long)bvl.column);
         [bvl setNeedsDisplay];
 
-        [self togglePlayer];
+        if ([self vLineDidCompleteSquare:bvl]==YES) {
+            [self incrementScore];
+        }
+        else {
+            [self togglePlayer];
+        }
         self.linesRemaining--;
         return YES;             // return YES to update the display
     }
     return NO;                  // nothing has changed - no update necessary
 }
 
-- (void) togglePlayer {
-    self.currentPlayer = (self.currentPlayer == LineStateRed) ? LineStateBlue : LineStateRed;
+
+- (BOOL) hLineDidCompleteSquare:(BoardHorizontalLine*)bhl {
+    
+    BOOL squareCompleted = NO;       // flag to indicated completed square above or below hLine
+    
+    if (bhl.row > 0) {          // check square above the hline
+        
+        int x = [self.board getHLineStateAtRow:(int)(bhl.row-1) andColumn:(int)bhl.column];
+        if ((x!=LineStateFree))
+//            &&
+//            ([self.board getVLineStateAtRow:(int)(bhl.row-1) andColumn:(int)bhl.column]!=0)&&
+//            ([self.board getVLineStateAtRow:(int)(bhl.row-1) andColumn:(int)bhl.column+1]!=0))
+        {
+            NSLog(@"**** Horizontal Line State at (%i, %i) is not free. ****", (int)bhl.row-1, (int)bhl.column);
+            [self.board setSquareAtRow:(int)(bhl.row-1) andColumn:(int)bhl.column toState:self.currentPlayer];
+            [self incrementScore];
+            squareCompleted = YES;
+        }
+    }
+    
+//    if (bhl.row < 8) {          // check square below the hline
+//        if (([self.board getHLineStateAtRow:(int)(bhl.row+1) andColumn:(int)bhl.column]!=0)&&
+//            ([self.board getVLineStateAtRow:(int)(bhl.row) andColumn:(int)bhl.column]!=0)&&
+//            ([self.board getVLineStateAtRow:(int)(bhl.row) andColumn:(int)bhl.column+1]!=0))
+//        {
+//            [self.board setSquareAtRow:(int)(bhl.row) andColumn:(int)bhl.column toState:self.currentPlayer];
+//            [self incrementScore];
+//            squareCompleted = YES;
+//        }
+//    }
+   return squareCompleted;
+}
+
+
+- (BOOL) vLineDidCompleteSquare:(BoardVerticalLine*)bvl {
+    
+    BOOL squareCompleted = NO;       // flag to indicated completed square above or below hLine
+
+    return squareCompleted;
 }
 
 @end

@@ -66,7 +66,14 @@
         }
     }
     
-    [self updateScores];        // call updateScores to fill in initial label values
+    // reset the hLine and vLine arrays
+    
+    [self.game.board resetHLines];
+    [self.game.board resetVLines];
+    
+    // call updateScores to fill in initial label values
+    
+    [self updateScores];
     
 }
 
