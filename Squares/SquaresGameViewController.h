@@ -17,4 +17,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *player2Name;
 @property (weak, nonatomic) IBOutlet UIButton *resetButton;
 @property (weak, nonatomic) IBOutlet UIButton *startButton;
+@property NSNumber *boardRows;
+@property NSNumber *boardCols;
+@property (weak, nonatomic) IBOutlet UISlider *sizeSlider;
+
+- (IBAction)sliderValueChanged:(id)sender;
 @end

@@ -57,7 +57,7 @@
         NSLog(@"Illegal LineState detected");
     }
     
-    CGContextSetLineCap(context, kCGLineCapRound);
+    CGContextSetLineCap(context, kCGLineCapButt);
     
     
     CGContextMoveToPoint(context, point.x, point.y);

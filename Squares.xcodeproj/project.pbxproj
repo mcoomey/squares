@@ -72,7 +72,6 @@
 		BD035CAF18CE3231000E47A3 /* GameBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameBoard.m; sourceTree = "<group>"; };
 		BDB7DDDC18D11CD600B4DB66 /* BoardSquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardSquare.h; sourceTree = "<group>"; };
 		BDB7DDDD18D11CD600B4DB66 /* BoardSquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardSquare.m; sourceTree = "<group>"; };
-		BDB7DDE018D225B400B4DB66 /* GameConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConstants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,7 +131,6 @@
 		BD035C6518C67206000E47A3 /* Squares */ = {
 			isa = PBXGroup;
 			children = (
-				BDB7DDE018D225B400B4DB66 /* GameConstants.h */,
 				BD035C7118C67206000E47A3 /* Main.storyboard */,
 				BD76A2BC18CF9148002A4C1D /* Control */,
 				BD035C9C18C786F7000E47A3 /* Model */,

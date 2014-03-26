@@ -16,6 +16,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <slider opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="6" minValue="3" maxValue="8" translatesAutoresizingMaskIntoConstraints="NO" id="mXg-Nc-qcQ">
+                                <rect key="frame" x="257" y="637" width="254" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="sliderValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="itk-J2-nMo"/>
+                                </connections>
+                            </slider>
                             <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cnF-Un-8Iv" customClass="SquaresBoardView">
                                 <rect key="frame" x="94" y="45" width="580" height="580"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -99,17 +106,6 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="pcV-Vo-QmW"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XFm-9L-PWL">
-                                <rect key="frame" x="351" y="619" width="68" height="51"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                <state key="normal" title="Start">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="startGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lAd-lN-UP6"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aoZ-KU-BeC">
                                 <rect key="frame" x="365" y="723" width="40" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -118,6 +114,17 @@
                                 </state>
                                 <connections>
                                     <action selector="requestGameReset:" destination="BYZ-38-t0r" eventType="touchUpInside" id="46w-Eq-Rna"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XFm-9L-PWL">
+                                <rect key="frame" x="350" y="681" width="68" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <state key="normal" title="Start">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="startGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lAd-lN-UP6"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -131,12 +138,10 @@
                             <constraint firstItem="301-7L-atz" firstAttribute="top" secondItem="cnF-Un-8Iv" secondAttribute="bottom" constant="8" symbolic="YES" id="JSt-r8-VLD"/>
                             <constraint firstItem="aoZ-KU-BeC" firstAttribute="top" secondItem="WXA-yM-2GQ" secondAttribute="bottom" constant="-8" id="MPI-eb-XJn"/>
                             <constraint firstItem="stD-Vw-Yw4" firstAttribute="trailing" secondItem="cnF-Un-8Iv" secondAttribute="trailing" id="Mia-vs-tbJ"/>
-                            <constraint firstItem="XFm-9L-PWL" firstAttribute="centerY" secondItem="301-7L-atz" secondAttribute="centerY" constant="0.5" id="UBn-VC-59S"/>
                             <constraint firstItem="kjz-9k-Dpc" firstAttribute="top" secondItem="cnF-Un-8Iv" secondAttribute="bottom" constant="12" id="VGb-qJ-fKh"/>
                             <constraint firstItem="stD-Vw-Yw4" firstAttribute="top" secondItem="cnF-Un-8Iv" secondAttribute="bottom" constant="50" id="WA5-pt-lPR"/>
                             <constraint firstItem="tdV-xO-dGe" firstAttribute="top" secondItem="cnF-Un-8Iv" secondAttribute="bottom" constant="50" id="bds-J3-UIk"/>
                             <constraint firstItem="r0j-WE-dMu" firstAttribute="centerY" secondItem="WXA-yM-2GQ" secondAttribute="centerY" constant="0.5" id="eOC-x9-874"/>
-                            <constraint firstItem="XFm-9L-PWL" firstAttribute="centerX" secondItem="301-7L-atz" secondAttribute="centerX" constant="0.5" id="fHR-9r-jst"/>
                             <constraint firstItem="WXA-yM-2GQ" firstAttribute="centerX" secondItem="cnF-Un-8Iv" secondAttribute="centerX" id="leJ-4y-Xox"/>
                             <constraint firstItem="r0j-WE-dMu" firstAttribute="centerX" secondItem="PCz-Yl-8kX" secondAttribute="centerX" id="map-6Y-ikI"/>
                             <constraint firstItem="aoZ-KU-BeC" firstAttribute="centerX" secondItem="WXA-yM-2GQ" secondAttribute="centerX" constant="1" id="r4n-43-heC"/>
@@ -144,6 +149,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="boardSizeSlider" destination="mXg-Nc-qcQ" id="WEb-vG-2Nd"/>
                         <outlet property="currentPlayerLabel" destination="WXA-yM-2GQ" id="pez-0h-cPC"/>
                         <outlet property="linesRemainingLabel" destination="301-7L-atz" id="VLo-O6-tui"/>
                         <outlet property="player1Name" destination="PCz-Yl-8kX" id="tcH-Zb-Jhs"/>
@@ -151,6 +157,7 @@
                         <outlet property="player2Name" destination="kjz-9k-Dpc" id="yDq-Rb-1K4"/>
                         <outlet property="player2ScoreLabel" destination="9jh-QN-Osh" id="tUy-V8-KkL"/>
                         <outlet property="resetButton" destination="aoZ-KU-BeC" id="mxR-EP-Z5k"/>
+                        <outlet property="sizeSlider" destination="mXg-Nc-qcQ" id="qXE-tK-qxg"/>
                         <outlet property="startButton" destination="XFm-9L-PWL" id="nqE-BP-7s7"/>
                     </connections>
                 </viewController>

@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GameConstants.h"
 #import "LineState.h"
 
 
@@ -16,6 +15,7 @@
 @property (nonatomic, strong) NSMutableArray *squares;
 @property (nonatomic, strong) NSMutableArray *vLines;
 @property (nonatomic, strong) NSMutableArray *hLines;
+- (GameBoard *) initWithNumRows:(int)rows andNumCols:(int)cols;
 - (void) resetHLines;
 - (void) resetVLines;
 - (void) resetSquares;

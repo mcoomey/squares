@@ -8,22 +8,27 @@
 
 #import "SquaresGame.h"
 #import "GameBoard.h"
-#import "GameConstants.h"
 #import "SquaresGameViewController.h"
 #import "BoardSquare.h"
+
+@interface SquaresGame()
+
+@property NSNumber *boardRows;
+@property NSNumber *boardCols;
+
+@end
 
 @implementation SquaresGame
 
 
-
-// initialize the game
--(SquaresGame*) init {
-
+- (SquaresGame *)initWithNumRows:(int)rows andNumCols:(int)cols {
+    
     self = [super init];
     if (self) {
+        self.board = [[GameBoard alloc] initWithNumRows:rows andNumCols:cols];
+        self.boardRows = [NSNumber numberWithInt:rows];
+        self.boardCols = [NSNumber numberWithInt:cols];
         [self resetGameValues];
-        NSLog(@"Game has been instantiated.");
-        self.board = [[GameBoard alloc] init];
     }
     return self;
 }
@@ -32,10 +37,10 @@
     self.player1Score = 0;
     self.player2Score = 0;
     self.currentPlayer = LineStateRed;
-    self.linesRemaining = NUM_ROWS * (NUM_COLS + 1) + NUM_COLS * (NUM_ROWS + 1);
-    [self.board resetHLines];
-    [self.board resetVLines];
-    [self.board resetSquares];
+    self.linesRemaining = [self.boardRows intValue] * ([self.boardCols intValue] + 1) + [self.boardCols intValue] * ([self.boardRows intValue] + 1);
+//    [self.board resetHLines];
+//    [self.board resetVLines];
+//    [self.board resetSquares];
 }
 
 
@@ -103,7 +108,7 @@
         }
     }
     
-    if (bhl.row < NUM_ROWS) {          // check square below the hline
+    if (bhl.row < [self.boardRows intValue]) {          // check square below the hline
         if (([self.board getHLineStateAtRow:(int)(bhl.row+1) andColumn:(int)bhl.column] != LineStateFree)&&
             ([self.board getVLineStateAtRow:(int)(bhl.row) andColumn:(int)bhl.column] != LineStateFree)&&
             ([self.board getVLineStateAtRow:(int)(bhl.row) andColumn:(int)bhl.column+1] != LineStateFree))
@@ -133,7 +138,7 @@
         }
     }
     
-    if (bvl.column < NUM_COLS) {          // check square right of vline
+    if (bvl.column < [self.boardCols intValue]) {          // check square right of vline
         if (([self.board getHLineStateAtRow:(int)(bvl.row) andColumn:(int)bvl.column] != LineStateFree)&&
             ([self.board getHLineStateAtRow:(int)(bvl.row+1) andColumn:(int)bvl.column] != LineStateFree)&&
             ([self.board getVLineStateAtRow:(int)(bvl.row) andColumn:(int)bvl.column+1] != LineStateFree))

@@ -19,6 +19,7 @@
 @property (nonatomic, readwrite) LineState currentPlayer;
 @property (nonatomic, readwrite) NSUInteger linesRemaining;
 
+- (SquaresGame *)initWithNumRows:(int)rows andNumCols:(int)cols;
 - (BOOL)selectHorizontalLine:(BoardHorizontalLine*)bhl;
 - (BOOL)selectVerticalLine:(BoardVerticalLine*)bvl;
 - (void) resetGameValues;
