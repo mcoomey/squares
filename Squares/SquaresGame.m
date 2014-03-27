@@ -28,19 +28,9 @@
         self.board = [[GameBoard alloc] initWithNumRows:rows andNumCols:cols];
         self.boardRows = [NSNumber numberWithInt:rows];
         self.boardCols = [NSNumber numberWithInt:cols];
-        [self resetGameValues];
+        self.linesRemaining = [self.boardRows intValue] * ([self.boardCols intValue] + 1) + [self.boardCols intValue] * ([self.boardRows intValue] + 1);
     }
     return self;
-}
-
-- (void) resetGameValues {
-    self.player1Score = 0;
-    self.player2Score = 0;
-    self.currentPlayer = LineStateRed;
-    self.linesRemaining = [self.boardRows intValue] * ([self.boardCols intValue] + 1) + [self.boardCols intValue] * ([self.boardRows intValue] + 1);
-//    [self.board resetHLines];
-//    [self.board resetVLines];
-//    [self.board resetSquares];
 }
 
 

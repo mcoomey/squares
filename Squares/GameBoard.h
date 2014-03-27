@@ -16,9 +16,7 @@
 @property (nonatomic, strong) NSMutableArray *vLines;
 @property (nonatomic, strong) NSMutableArray *hLines;
 - (GameBoard *) initWithNumRows:(int)rows andNumCols:(int)cols;
-- (void) resetHLines;
-- (void) resetVLines;
-- (void) resetSquares;
+
 - (void) setVLineAtRow:(int)row andColumn:(int)col toState:(LineState)lstate;
 - (void) setHLineAtRow:(int)row andColumn:(int)col toState:(LineState)lstate;
 - (void) setSquareAtRow:(int)row andColumn:(int)col toState:(LineState)lstate;

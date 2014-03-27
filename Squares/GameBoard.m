@@ -42,32 +42,6 @@
 }
 
 
-// reset the hLines
--(void) resetHLines {
-    LineState ls = LineStateFree;
-    for (int idx=0; idx < ([self.boardRows intValue]+1)*[self.boardCols intValue]; idx++) {
-        [self.hLines replaceObjectAtIndex:idx withObject:[NSNumber numberWithInt:ls]];
-    }
-}
-
-// reset the vLines
--(void) resetVLines {
-    LineState ls = LineStateFree;
-    for (int idx=0; idx < ([self.boardCols intValue]+1)*[self.boardRows intValue]; idx++){
-        [self.vLines replaceObjectAtIndex:idx withObject:[NSNumber numberWithInt:ls]];
-    }
-}
-
-// reset the squares
--(void) resetSquares {
-    BoardSquare *bsq = [[BoardSquare alloc]init];
-    [bsq setStateOfSquare:LineStateFree];
-    for (int idx=0; idx < ([self.boardCols intValue] * [self.boardRows intValue]); idx++) {
-        [self.squares replaceObjectAtIndex:idx withObject:bsq];
-    }
-}
-
-
 - (void) setVLineAtRow:(int)row andColumn:(int)col toState:(LineState)lstate
 {
     int idx = row * ([self.boardCols intValue]+1) + col;
