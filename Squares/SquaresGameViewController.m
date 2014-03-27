@@ -21,6 +21,7 @@
 @property NSArray *boardSizes;
 @property UIView *squaresBoardView;
 @property UIView *boardSizeSlider;
+@property UIScrollView *scrollView;
 @end
 
 @implementation SquaresGameViewController
@@ -48,6 +49,10 @@
     self.squaresBoardView.hidden = NO;
     self.boardSizeSlider.hidden = NO;
     
+    
+    // get pointer to the scroll view to scroll for keyboard display
+    
+    self.scrollView = (UIScrollView*)[self.view viewWithTag:99];
     
     // Get pointer to the squares view and make sure it's visible
     
@@ -363,6 +368,92 @@
         [self.currentPlayerLabel setText:@"Game Over"];
         [self.currentPlayerLabel setTextColor:[UIColor greenColor]];
     }
+}
+
+//************************ scroll the view when keyboard is displayed ***************************//
+
+- (void)registerForKeyboardNotifications {
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    
+}
+
+- (void)deregisterFromKeyboardNotifications {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardDidHideNotification
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillHideNotification
+                                                  object:nil];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    [self registerForKeyboardNotifications];
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [self deregisterFromKeyboardNotifications];
+    
+    [super viewWillDisappear:animated];
+    
+}
+
+-(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    NSString *msg = [[NSString alloc]init];
+    switch (toInterfaceOrientation) {
+        case UIInterfaceOrientationLandscapeLeft:
+            msg = @"Landscape Left";
+            break;
+        case UIInterfaceOrientationLandscapeRight:
+            msg = @"Landscape Right";
+            break;
+        case UIInterfaceOrientationPortrait:
+            msg = @"Portrait";
+            break;
+        case UIInterfaceOrientationPortraitUpsideDown:
+            msg = @"Portrait UpsideDown";
+            break;
+        default:
+            msg = @"Unknown";
+            break;
+    }
+    NSLog(@"about to rotate to %@", msg);
+}
+
+
+- (void)keyboardWasShown:(NSNotification *)notification {
+    
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if (UIInterfaceOrientationIsLandscape(orientation)) {
+        NSDictionary* info = [notification userInfo];
+        CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+        
+        // in landscape mode the kb heigth and width are swapped
+        CGPoint scrollPoint = CGPointMake(0.0, keyboardSize.width);
+        [self.scrollView setContentOffset:scrollPoint animated:YES];
+    }
+}
+
+- (void)keyboardWillBeHidden:(NSNotification *)notification {
+    
+    [self.scrollView setContentOffset:CGPointZero animated:YES];
+    
 }
 
 @end
